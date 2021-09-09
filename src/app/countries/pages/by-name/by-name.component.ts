@@ -1,16 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { Country } from '../../interfaces/countries.interfaces';
+import { CountryService } from '../../services/country.service';
 
 @Component({
   selector: 'app-by-name',
   templateUrl: './by-name.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class ByNameComponent implements OnInit {
+export class ByNameComponent {
+  term: string = '';
+  hasError: boolean = false;
+  countries: Country[] = [];
 
-  constructor() { }
+  constructor(private countryService: CountryService) {}
 
-  ngOnInit(): void {
+  findCountry() {
+    this.hasError = false;
+    this.countryService.findCountry(this.term).subscribe(
+      (response) => {
+        this.countries = response;
+      },
+      (err) => {
+        this.hasError = true;
+        this.countries = [];
+      }
+    );
   }
-
 }
