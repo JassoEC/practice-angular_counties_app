@@ -15,8 +15,10 @@ export class ByNameComponent {
 
   constructor(private countryService: CountryService) {}
 
-  findCountry() {
+  findCountry(term: string) {
     this.hasError = false;
+    this.term = term;
+
     this.countryService.findCountry(this.term).subscribe(
       (response) => {
         this.countries = response;
@@ -27,4 +29,8 @@ export class ByNameComponent {
       }
     );
   }
+
+  sugestions = (term: string) => {
+    this.hasError = false;
+  };
 }

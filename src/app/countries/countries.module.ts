@@ -7,6 +7,8 @@ import { ByNameComponent } from './pages/by-name/by-name.component';
 import { ByRegionComponent } from './pages/by-region/by-region.component';
 import { SeeCountryComponent } from './pages/see-country/see-country.component';
 import { RouterModule } from '@angular/router';
+import { CountriesTableComponent } from './components/countries-table/countries-table.component';
+import { SearchInputComponent } from './components/search-input/search-input.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { RouterModule } from '@angular/router';
     ByNameComponent,
     ByRegionComponent,
     SeeCountryComponent,
+    CountriesTableComponent,
+    SearchInputComponent,
   ],
   imports: [CommonModule, FormsModule, RouterModule],
   exports: [

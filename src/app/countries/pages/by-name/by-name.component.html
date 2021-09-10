@@ -1,33 +1,11 @@
 <div class="row">
   <div class="col">
-    <form (ngSubmit)="findCountry()">
-      <input type="text" name="name" placeholder="Buscar país" class="form-control" autocomplete="off"
-        [(ngModel)]="term" />
-    </form>
+    <app-search-input (onEnter)="findCountry($event)" (onDebounce)="sugestions($event)"></app-search-input>
     <hr />
     <div class="alert alert-danger" *ngIf="hasError">No se encontro nada con el término: {{term}}</div>
     <div class="row" *ngIf="!hasError">
       <div class="col">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Bandera</th>
-              <th>Poblacion</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let country of countries;  let i = index">
-              <td>{{i + 1}}</td>
-              <td>{{country.name}}</td>
-              <td><img class="small-flag" [src]="country.flag" alt=""></td>
-              <td>{{country.population | number}}</td>
-              <td><a [routerLink]="['/country', country.alpha2Code]" routerLinkActive="router-link-active" >Ver más...</a></td>
-            </tr>
-          </tbody>
-        </table>
+        <app-countries-table [countries]="countries"></app-countries-table>
       </div>
     </div>
   </div>
