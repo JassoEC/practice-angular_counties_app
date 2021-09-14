@@ -1,8 +1,30 @@
 <div class="row">
   <div class="col">
-    <app-search-input placeholder="Buscar por nombre..." (onEnter)="findCountry($event)" (onDebounce)="sugestions($event)"></app-search-input>
+    <app-search-input
+      placeholder="Buscar por nombre..."
+      (onEnter)="findCountry($event)"
+      (onDebounce)="sugestions($event)"
+    ></app-search-input>
+    <ul class="list-group">
+      <li
+        class="list-group-item list-group-item-action"
+        *ngFor="let country of sugestedCountries"
+      >
+        <a class="nav-link" [routerLink]="['/country', country.alpha2Code]">{{
+          country.name
+        }}</a>
+      </li>
+
+      <li class="list-group-item list-group-item-action" *ngIf="term">
+        <a (click)="findSugestions(term)" class="nav-link">
+          Buscar "{{ term }}"</a
+        >
+      </li>
+    </ul>
     <hr />
-    <div class="alert alert-danger" *ngIf="hasError">No se encontro nada con el término: {{term}}</div>
+    <div class="alert alert-danger" *ngIf="hasError">
+      No se encontro nada con el término: {{ term }}
+    </div>
     <div class="row" *ngIf="!hasError">
       <div class="col">
         <app-countries-table [countries]="countries"></app-countries-table>

@@ -1,16 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { Country } from '../../interfaces/countries.interfaces';
+import { CountryService } from '../../services/country.service';
 
 @Component({
   selector: 'app-by-region',
   templateUrl: './by-region.component.html',
-  styles: [
-  ]
+  styles: [],
 })
-export class ByRegionComponent implements OnInit {
+export class ByRegionComponent {
+  constructor(private countrySerivce: CountryService) {}
 
-  constructor() { }
+  regions: string[] = ['africa', 'americas', 'asia', 'oceania', 'europe'];
+  activeRegion: string = '';
 
-  ngOnInit(): void {
-  }
+  contries: Country[] = [];
 
+  activateRegion = (region: string) => {
+
+    if(region === this.activeRegion){return}
+    this.activeRegion = region;
+    this.contries = [];
+    this.countrySerivce
+      .findByRegion(region)
+      .subscribe((countries) => (this.contries = countries));
+  };
 }

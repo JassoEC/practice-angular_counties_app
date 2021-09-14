@@ -19,10 +19,7 @@ export class SeeCountryComponent implements OnInit {
 
   ngOnInit(): void {
     this.activateRoute.params
-      .pipe(
-        switchMap(({ code }) => this.countryService.findByCode(code)),
-        tap(console.log)
-      )
+      .pipe(switchMap(({ code }) => this.countryService.findByCode(code)))
       .subscribe((country) => (this.country = country));
   }
 }
